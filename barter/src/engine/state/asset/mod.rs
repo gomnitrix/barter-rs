@@ -114,7 +114,7 @@ impl AssetState {
     /// are at least as recent as the current state.
     pub fn update_from_balance<AssetKey>(&mut self, snapshot: Snapshot<&AssetBalance<AssetKey>>) {
         let Some(balance) = &mut self.balance else {
-            self.balance = Some(Timed::new(snapshot.0.balance, snapshot.0.time_exchange));
+            self.balance = Some(Timed::new(snapshot.value().balance, snapshot.value().time_exchange));
             self.statistics.update_from_balance(snapshot);
             return;
         };

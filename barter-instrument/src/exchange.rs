@@ -32,6 +32,7 @@ impl Display for ExchangeIndex {
 #[serde(rename = "execution", rename_all = "snake_case")]
 pub enum ExchangeId {
     Other,
+    // =========== CEX ===========
     Simulated,
     Mock,
     BinanceFuturesCoin,
@@ -74,6 +75,12 @@ pub enum ExchangeId {
     Mexc,
     Okx,
     Poloniex,
+    // =========== DEX ===========
+    Jupter,
+    Uniswap,
+    PancakeSwap,
+    SushiSwap,
+    OkxWeb3,
 }
 
 impl ExchangeId {
@@ -81,6 +88,7 @@ impl ExchangeId {
     pub fn as_str(&self) -> &'static str {
         match self {
             ExchangeId::Other => "other",
+            // =========== CEX ===========
             ExchangeId::Simulated => "simulated",
             ExchangeId::Mock => "mock",
             ExchangeId::BinanceFuturesCoin => "binance_futures_coin",
@@ -122,7 +130,23 @@ impl ExchangeId {
             ExchangeId::Mexc => "mexc",
             ExchangeId::Okx => "okx",
             ExchangeId::Poloniex => "poloniex",
+            // =========== DEX ===========
+            ExchangeId::Jupter => "jupter",
+            ExchangeId::Uniswap => "uniswap",
+            ExchangeId::PancakeSwap => "pancake_swap",
+            ExchangeId::SushiSwap => "sushi_swap",
+            ExchangeId::OkxWeb3 => "okx_web3",
         }
+    }
+    pub fn is_dex(&self) -> bool {
+        matches!(
+            self,
+            ExchangeId::Jupter
+                | ExchangeId::Uniswap
+                | ExchangeId::PancakeSwap
+                | ExchangeId::SushiSwap
+                | ExchangeId::OkxWeb3
+        )
     }
 }
 

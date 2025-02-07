@@ -244,11 +244,11 @@ impl<Event, OnTradingDisabled, OnDisconnect>
         }
     }
 
-    pub fn with_market_update<E>(event: E, account: UpdateFromMarketOutput<OnDisconnect>) -> Self
+    pub fn with_market_update<E>(event: E, market: UpdateFromMarketOutput<OnDisconnect>) -> Self
     where
         E: Into<Event>,
     {
-        match account {
+        match market {
             UpdateFromMarketOutput::None => Self::Process(event.into()),
             UpdateFromMarketOutput::OnDisconnect(disconnect) => Self::ProcessWithOutput(
                 event.into(),

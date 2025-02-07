@@ -128,13 +128,13 @@ impl<Market, Strategy, Risk> EngineState<Market, Strategy, Risk> {
             }
             AccountEventKind::BalanceSnapshot(balance) => {
                 self.assets
-                    .asset_index_mut(&balance.0.asset)
+                    .asset_index_mut(&balance.value().asset)
                     .update_from_balance(balance.as_ref());
                 None
             }
             AccountEventKind::OrderSnapshot(order) => {
                 self.instruments
-                    .instrument_index_mut(&order.0.instrument)
+                    .instrument_index_mut(&order.value().instrument)
                     .orders
                     .update_from_order_snapshot(order.as_ref());
                 None
